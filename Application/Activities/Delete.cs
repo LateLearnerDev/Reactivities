@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MediatR;
 using Persistence;
 
@@ -14,16 +10,24 @@ namespace Application.Activities
             public Guid Id { get; set; }
         }
 
-        public class Hander : IRequestHandler<Command>
+        public class Handler : IRequestHandler<Command>
         {
-            public Delete(DataContext context)
+            private readonly DataContext _context;
+
+            public Handler(DataContext context)
             {
                 _context = context;
             }
             
-            public Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                var activity = await _context.Activities.FindAsync(request.Id);
+
+                _context.Remove(activity);
+
+                await _context.SaveChangesAsync();
+
+                return Unit.Value;
             }
         }
     }
