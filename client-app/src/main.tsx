@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
 import 'semantic-ui-css/semantic.min.css'
-import './index.css'
+import './app/layout/styles.css'
+import App from './app/layout/App'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <App />
