@@ -4,11 +4,13 @@ import { IActivity } from '../../../app/models/activity';
 
 interface IProps {
     activity: IActivity | undefined;
+    submitting: boolean;
+
     closeForm: () => void;
     createOrEdit: (activity: IActivity) => void;
 }
 
-const ActivityForm = ({ activity: selectedActivity, closeForm, createOrEdit }: IProps) => {
+const ActivityForm = ({ activity: selectedActivity, closeForm, createOrEdit, submitting }: IProps) => {
 
     const initialState = selectedActivity ?? {
         id: '',
@@ -42,7 +44,7 @@ const ActivityForm = ({ activity: selectedActivity, closeForm, createOrEdit }: I
                 <Form.Input type='date' placeholder='Date' value={activity.date} name='date' onChange={handlueInputChange} />
                 <Form.Input placeholder='City' value={activity.city} name='city' onChange={handlueInputChange} />
                 <Form.Input placeholder='Venue' value={activity.venue} name='venue' onChange={handlueInputChange} />
-                <Button floated='right' positive type='submit' content='Submit' />
+                <Button loading={submitting} floated='right' positive type='submit' content='Submit' />
                 <Button onClick={closeForm} floated='right' type='button' content='Cancel' />
             </Form>
         </Segment>

@@ -9,6 +9,7 @@ interface IProps {
     activities: IActivity[];
     selectedActivity: IActivity | undefined;
     editMode: boolean;
+    submitting: boolean;
     
     selectActivity: (id: string) => void;
     cancelSeletActivity: () => void;
@@ -20,7 +21,8 @@ interface IProps {
 }
 
 const ActivityDashboard = ({ activities, selectActivity, selectedActivity, cancelSeletActivity, 
-    editMode, openForm, closeForm, createOrEdit, deleteActivity, setEditMode }: IProps) => {
+    editMode, openForm, closeForm, createOrEdit, deleteActivity, 
+    setEditMode, submitting }: IProps) => {
     return (
         <Grid>
             <Grid.Column width='10'>
@@ -30,6 +32,7 @@ const ActivityDashboard = ({ activities, selectActivity, selectedActivity, cance
                         selectActivity={selectActivity}
                         deleteActivity={deleteActivity}
                         setEditMode={setEditMode}
+                        submitting={submitting}
                     />
                 </List>
             </Grid.Column>
@@ -45,6 +48,7 @@ const ActivityDashboard = ({ activities, selectActivity, selectedActivity, cance
                         closeForm={closeForm}
                         activity={selectedActivity}
                         createOrEdit={createOrEdit}
+                        submitting={submitting}
                     />}
 
             </Grid.Column>

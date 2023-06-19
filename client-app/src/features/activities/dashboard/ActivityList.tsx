@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 import { IActivity } from '../../../app/models/activity';
 import { Button, Item, Label, Segment } from 'semantic-ui-react';
 
 interface IProps {
     activities: IActivity[];
+    submitting: boolean;
     selectActivity: (id: string) => void;
     deleteActivity: (id: string) => void;
     setEditMode: (enabled: boolean) => void;
 }
 
-const ActivityList = ({ activities, selectActivity, deleteActivity, setEditMode }: IProps) => {
+const ActivityList = ({ activities, selectActivity, deleteActivity, setEditMode, submitting }: IProps) => {
+    const [target, setTarget] = useState('');
+
+    const handleActivityDelete = (e: SyntheticEvent<HTMLButtonElement>, id: string) => {
+        setTarget(e.currentTarget.name);
+        deleteActivity(id);
+    };
+    
     return (
         <Segment color='blue'>
             <Item.Group divided>
@@ -28,7 +36,13 @@ const ActivityList = ({ activities, selectActivity, deleteActivity, setEditMode 
                                     selectActivity(activity.id)
                                 }}
                                     floated='right' content='View' color='blue' />
-                                <Button onClick={() => deleteActivity(activity.id)} floated='right' content='Delete' color='red' />
+                                <Button
+                                    name={activity.id}
+                                    loading={submitting && target === activity.id}
+                                    onClick={(e) => handleActivityDelete(e, activity.id)}
+                                    floated='right'
+                                    content='Delete'
+                                    color='red' />
                                 <Label basic content={activity.category} />
                             </Item.Extra>
                         </Item.Content>
