@@ -8,17 +8,19 @@ import ActivityForm from '../form/ActivityForm';
 interface IProps {
     activities: IActivity[];
     selectedActivity: IActivity | undefined;
+    editMode: boolean;
+    
     selectActivity: (id: string) => void;
     cancelSeletActivity: () => void;
-    editMode: boolean;
     openForm: (id: string) => void;
     closeForm: () => void;
+    setEditMode: (enabled: boolean) => void;
     createOrEdit: (activity: IActivity) => void;
     deleteActivity: (id: string) => void;
 }
 
 const ActivityDashboard = ({ activities, selectActivity, selectedActivity, cancelSeletActivity, 
-    editMode, openForm, closeForm, createOrEdit, deleteActivity }: IProps) => {
+    editMode, openForm, closeForm, createOrEdit, deleteActivity, setEditMode }: IProps) => {
     return (
         <Grid>
             <Grid.Column width='10'>
@@ -27,6 +29,7 @@ const ActivityDashboard = ({ activities, selectActivity, selectedActivity, cance
                         activities={activities}
                         selectActivity={selectActivity}
                         deleteActivity={deleteActivity}
+                        setEditMode={setEditMode}
                     />
                 </List>
             </Grid.Column>

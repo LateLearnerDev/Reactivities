@@ -39,7 +39,7 @@ const ActivityForm = ({ activity: selectedActivity, closeForm, createOrEdit }: I
                 <Form.Input placeholder='Title' value={activity.title} name='title' onChange={handlueInputChange} />
                 <Form.TextArea placeholder='Description' value={activity.description} name='description' onChange={handlueInputChange} />
                 <Form.Input placeholder='Category' value={activity.category} name='category' onChange={handlueInputChange} />
-                <Form.Input placeholder='Date' value={activity.date} name='date' onChange={handlueInputChange} />
+                <Form.Input type='date' placeholder='Date' value={activity.date} name='date' onChange={handlueInputChange} />
                 <Form.Input placeholder='City' value={activity.city} name='city' onChange={handlueInputChange} />
                 <Form.Input placeholder='Venue' value={activity.venue} name='venue' onChange={handlueInputChange} />
                 <Button floated='right' positive type='submit' content='Submit' />
